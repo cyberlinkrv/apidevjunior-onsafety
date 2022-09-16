@@ -1,33 +1,34 @@
-package com.djssoftware.apidevjunior.entities;
+package com.djssoftware.apidevjunior.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.djssoftware.apidevjunior.entities.Pessoa;
 
-@Entity
-@Table(name = "tb_pessoa")
-public class Pessoa implements Serializable{
+public class PessoaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
 	private String email;
 	
-	public Pessoa(){
+	public PessoaDTO() {
 		
 	}
+	
+	public PessoaDTO(Pessoa entity) {
+		this.id = entity.getId();
+		this.nome = entity.getNome();
+		this.cpf = entity.getCpf();
+		this.dataNascimento = entity.getDataNascimento();
+		this.email = entity.getEmail();
+	}
+	
+	
 
-	public Pessoa(Long id, String nome, String cpf, LocalDate dataNascimento, String email) {
+	public PessoaDTO(Long id, String nome, String cpf, LocalDate dataNascimento, String email) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -74,24 +75,7 @@ public class Pessoa implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		return Objects.equals(id, other.id);
-	}
-	
-	
-	
 }
